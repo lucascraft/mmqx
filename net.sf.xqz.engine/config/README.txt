@@ -1,0 +1,1 @@
+on MacOSX deploy cdo-server.xml under /Users/lb/config or /eclipse/Eclipse.app/Contents/MacOS/config/

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/net.sf.xqz.script/src-gen" editDirectory="/net.sf.xqz.script.edit/src"
+    editorDirectory="/net.sf.xqz.script.editor/src" modelPluginID="net.sf.xqz.script"
+    forceOverwrite="true" modelName="Orchestror" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="net.sf.xqz.script.edit"
+    editorPluginID="net.sf.xqz.script.editor">
+  <genPackages prefix="Orchestror" basePackage="net.sf.xqz.engine.script" disposableProviderFactory="true"
+      ecorePackage="Orchestror.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Orchestror.ecore#//DSLStrategy">
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/PICK_N_RUSH"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/OLDEST_MOST_URGENT"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/NEWEST_MOST_URGENT"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/PREDICATE"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/ROUN_ROBIN"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/TIME_RANGE_INCLUSIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLStrategy/TIME_RANGE_EXCLUSIVE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Orchestror.ecore#//DSLRate">
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/MAX"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/VERY_FAST"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/FAST"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/AVERAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/SLOW"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/VERY_SLOW"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLRate/MIN"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Orchestror.ecore#//DSLPriority">
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLPriority/HIGHER"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLPriority/HIGH"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLPriority/MEDIUM"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLPriority/LOW"/>
+      <genEnumLiterals ecoreEnumLiteral="Orchestror.ecore#//DSLPriority/LOWEST"/>
+    </genEnums>
+    <genClasses ecoreClass="Orchestror.ecore#//DSLOrchestror">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLOrchestror/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Orchestror.ecore#//DSLOrchestror/engines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Orchestror.ecore#//DSLOrchestror/clients"/>
+    </genClasses>
+    <genClasses ecoreClass="Orchestror.ecore#//DSLCommandEngine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/speed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/ttl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/strategy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/threshold"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLCommandEngine/fillterID"/>
+    </genClasses>
+    <genClasses ecoreClass="Orchestror.ecore#//DSLEngineClient">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLEngineClient/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Orchestror.ecore#//DSLEngineClient/speed"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Orchestror.ecore#//DSLEngineClient/refCmdEngines"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

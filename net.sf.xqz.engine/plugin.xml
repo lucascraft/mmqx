@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.5 2009/01/06 20:40:06 lucascraft Exp $
+-->
+
+<plugin>
+   <extension-point id="cmdHandler" name="Command Handler" schema="schema/cmdHandler.exsd"/>
+   <extension-point id="cmdInterpreter" name="Command Interpreter" schema="schema/cmdInterpreter.exsd"/>
+   <extension-point id="frameInterpreter" name="Frame Interpreter" schema="schema/frameInterpreter.exsd"/>
+   <extension-point id="cmdEngineAction" name="Command Engine Action" schema="schema/cmdEngineAction.exsd"/>
+   <extension-point id="cmdSetProvider" name="Command Set" schema="schema/cmdSetProvider.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated temporal -->
+      <package
+            uri="http://net.sf.xqz/temporal/1.0.0"
+            class="net.sf.xqz.model.temporal.TemporalPackage"
+            genModel="model/temporal.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://net.sf.xqz/engine/1.0.0"
+            class="net.sf.xqz.model.engine.EnginePackage"
+            genModel="model/engine.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://net.sf.xqz/command/1.0.0"
+            class="net.sf.xqz.model.cmd.CmdPackage"
+            genModel="model/engine.genmodel"/>
+   </extension>
+
+</plugin>

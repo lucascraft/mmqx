@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="" modelDirectory="/net.sf.xqz.engine/src" editorDirectory=""
+    modelPluginID="net.sf.xqz.engine" modelName="Temporal" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    suppressEMFTypes="true" featureMapWrapperInternalInterface="" featureMapWrapperClass=""
+    reflectiveDelegation="true" testsDirectory="" booleanFlagsField="" importerID="org.eclipse.emf.importer.cdo"
+    featureDelegation="Reflective" suppressUnsettable="true" complianceLevel="5.0"
+    copyrightFields="false" language="" packedEnums="true" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
+    interfaceNamePattern="" runtimePlatform="GWT">
+  <foreignModel>temporal.ecore</foreignModel>
+  <genPackages prefix="Temporal" basePackage="net.sf.xqz.model" disposableProviderFactory="true"
+      ecorePackage="temporal.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="temporal.ecore#//EXECUTION_STATUS">
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/PLAY"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/STOP"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/FORWARD"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/BACKWARD"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/FROZEN"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/RECORD"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/UNDEFINED"/>
+      <genEnumLiterals ecoreEnumLiteral="temporal.ecore#//EXECUTION_STATUS/MUTE"/>
+    </genEnums>
+    <genClasses ecoreClass="temporal.ecore#//TimeLine">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeLine/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeLine/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeLine/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeLine/finish"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeLine/status"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference temporal.ecore#//TimeLine/cmdEngine"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference temporal.ecore#//TimeLine/orchestror"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference temporal.ecore#//TimeLine/time"/>
+    </genClasses>
+    <genClasses ecoreClass="temporal.ecore#//Orchestror">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//Orchestror/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//Orchestror/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference temporal.ecore#//Orchestror/timelines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference temporal.ecore#//Orchestror/application"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference temporal.ecore#//Orchestror/time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//Orchestror/clock"/>
+    </genClasses>
+    <genClasses ecoreClass="temporal.ecore#//TimeInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeInfo/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeInfo/cursor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeInfo/duration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute temporal.ecore#//TimeInfo/tick"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Engine" basePackage="net.sf.xqz.model" disposableProviderFactory="true"
+      contentTypeIdentifier="" ecorePackage="engine.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="engine.ecore#//EVENT_KIND">
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/RX_READY"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/TX_DONE"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/RX_FRAME"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/RX_DONE"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/TX_READY"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//EVENT_KIND/TX_FRAME"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="engine.ecore#//QxProcessingStrategy">
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/OLDEST_MOST_URGENT"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/NEWEST_MOST_URGENT"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/ROUND_ROBIN"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/PREDICATE"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/TIME_RANGE_EXCLUSIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/TIME_RANGE_INCLUSIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//QxProcessingStrategy/PICK_N_FLUSH"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="engine.ecore#//TriggerKind">
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//TriggerKind/PARALLEL"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//TriggerKind/ANY"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//TriggerKind/ONE_OF_IT"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//TriggerKind/NOT_ONE_OF_IT"/>
+      <genEnumLiterals ecoreEnumLiteral="engine.ecore#//TriggerKind/BLOCKING"/>
+    </genEnums>
+    <genClasses ecoreClass="engine.ecore#//Tx"/>
+    <genClasses ecoreClass="engine.ecore#//Rx"/>
+    <genClasses image="false" ecoreClass="engine.ecore#//Qx">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//Qx/commands"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference engine.ecore#//Qx/engine"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Qx/locked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Qx/currentMaxPriority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Qx/ttl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Qx/threshold"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//Qx/timeRange"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Qx/strategy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Qx/max"/>
+      <genOperations ecoreOperation="engine.ecore#//Qx/postCommand">
+        <genParameters ecoreParameter="engine.ecore#//Qx/postCommand/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//Qx/consumeCommand"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//CmdPipe">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/queues"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/client"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/application"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/priority"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/tx"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/rx"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/events"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/commandPool"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/outputInterpreter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/port"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/inputInterpreter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/recording"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/triggers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/addr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/ports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/transportProtocol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/communicationProtocol"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/txEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//CmdPipe/rxEvents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/speed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/activated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/locked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdPipe/topic"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/initCmdPool"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/addQxEventHandler">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/addQxEventHandler/handler"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/removeQxEventHandler">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/removeQxEventHandler/handler"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/activateAll"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/deactivateAll"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/activateQxEventHandler">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/activateQxEventHandler/qxEvtHandler"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/deactivateQxEventHandler">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/deactivateQxEventHandler/qxEvtHandler"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/activateEngine">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/activateEngine/engineID"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/deactivateEngine">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/deactivateEngine/engineID"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/receive">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/receive/stream"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/send">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/send/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/send.1">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/send.1/cmd"/>
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/send.1/handler"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/reconnect">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/reconnect/portID"/>
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/reconnect/acceptedPort"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/addTrigger"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/finalize"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/start"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/startInput"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/startOutput"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/stop"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/stopInput"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/stopOutput"/>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/send.2">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/send.2/cmd"/>
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/send.2/delay"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/receive.1">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/receive.1/frame"/>
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/receive.1/delay"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/syncSend">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/syncSend/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//CmdPipe/syncSend.1">
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/syncSend.1/cmd"/>
+        <genParameters ecoreParameter="engine.ecore#//CmdPipe/syncSend.1/timeout"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//EngineClient">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//EngineClient/engines"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//EngineClient/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//EngineClient/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference engine.ecore#//EngineClient/application"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//EngineClient/runner"/>
+      <genOperations ecoreOperation="engine.ecore#//EngineClient/start"/>
+      <genOperations ecoreOperation="engine.ecore#//EngineClient/stop"/>
+      <genOperations ecoreOperation="engine.ecore#//EngineClient/quicken"/>
+      <genOperations ecoreOperation="engine.ecore#//EngineClient/slow"/>
+      <genOperations ecoreOperation="engine.ecore#//EngineClient/activate"/>
+      <genOperations ecoreOperation="engine.ecore#//EngineClient/deactivate"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//EngineApplication">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//EngineApplication/engine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//EngineApplication/clients"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//EngineApplication/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//EngineApplication/name"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Event/kind"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//Event/cmd"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//Event/qx"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Event/time"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Event/bytes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Event/topic"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="engine.ecore#//IXCmdInterpreter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IXCmdInterpreter/ID"/>
+      <genOperations ecoreOperation="engine.ecore#//IXCmdInterpreter/cmd2ByteArray">
+        <genParameters ecoreParameter="engine.ecore#//IXCmdInterpreter/cmd2ByteArray/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IXCmdInterpreter/processResults">
+        <genParameters ecoreParameter="engine.ecore#//IXCmdInterpreter/processResults/cmd"/>
+        <genParameters ecoreParameter="engine.ecore#//IXCmdInterpreter/processResults/stream"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IXCmdInterpreter/getCmdResultLength">
+        <genParameters ecoreParameter="engine.ecore#//IXCmdInterpreter/getCmdResultLength/cmd"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="engine.ecore#//AbstractCmdInterpreter"/>
+    <genClasses image="false" ecoreClass="engine.ecore#//IQxEventHandler">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IQxEventHandler/ID"/>
+      <genOperations ecoreOperation="engine.ecore#//IQxEventHandler/handleQxEvent">
+        <genParameters ecoreParameter="engine.ecore#//IQxEventHandler/handleQxEvent/event"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="engine.ecore#//IQxEventNotifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IQxEventNotifier/ID"/>
+      <genOperations ecoreOperation="engine.ecore#//IQxEventNotifier/notifyQxEvent">
+        <genParameters ecoreParameter="engine.ecore#//IQxEventNotifier/notifyQxEvent/event"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="engine.ecore#//AbstractQxEventHandler"/>
+    <genClasses image="false" ecoreClass="engine.ecore#//AbstractQxEventNotifier"/>
+    <genClasses ecoreClass="engine.ecore#//Port">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//Port/engine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//Port/inputJobs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference engine.ecore#//Port/outputJobs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference engine.ecore#//Port/channel"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/init"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/finalize"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/deactivate"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/activate"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/start"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/startInput"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/startOutput"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/stop"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/stopInput"/>
+      <genOperations ecoreOperation="engine.ecore#//Port/stopOutput"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//IXFrameInterpreter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IXFrameInterpreter/ID"/>
+      <genOperations ecoreOperation="engine.ecore#//IXFrameInterpreter/byteArray2Cmd">
+        <genParameters ecoreParameter="engine.ecore#//IXFrameInterpreter/byteArray2Cmd/stream"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//AbstractFrameInterpreter"/>
+    <genClasses image="false" ecoreClass="engine.ecore#//ICmdEngineAction">
+      <genOperations ecoreOperation="engine.ecore#//ICmdEngineAction/run">
+        <genParameters ecoreParameter="engine.ecore#//ICmdEngineAction/run/qx"/>
+        <genParameters ecoreParameter="engine.ecore#//ICmdEngineAction/run/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//ICmdEngineAction/run.1">
+        <genParameters ecoreParameter="engine.ecore#//ICmdEngineAction/run.1/qx"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//ICmdEngineAction/run.2">
+        <genParameters ecoreParameter="engine.ecore#//ICmdEngineAction/run.2/qx"/>
+        <genParameters ecoreParameter="engine.ecore#//ICmdEngineAction/run.2/args"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="engine.ecore#//AbstractCmdEngineAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//AbstractCmdEngineAction/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//AbstractCmdEngineAction/args"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//CmdEngineActionArg">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdEngineActionArg/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//CmdEngineActionArg/value"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//QxTimeRange">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//QxTimeRange/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//QxTimeRange/end"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//InputJob"/>
+    <genClasses ecoreClass="engine.ecore#//OutputJob"/>
+    <genClasses image="false" ecoreClass="engine.ecore#//IConnectedUnit">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//IConnectedUnit/engines"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//IConnectedUnit/default"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//Trigger">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//Trigger/kind"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//Trigger/target"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//IOJob">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IOJob/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IOJob/job"/>
+      <genOperations ecoreOperation="engine.ecore#//IOJob/close"/>
+      <genOperations ecoreOperation="engine.ecore#//IOJob/start"/>
+      <genOperations ecoreOperation="engine.ecore#//IOJob/stop"/>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//SynchronousQxEventHandler">
+      <genOperations ecoreOperation="engine.ecore#//SynchronousQxEventHandler/getLastEvent"/>
+      <genOperations ecoreOperation="engine.ecore#//SynchronousQxEventHandler/getLastRcvEvent"/>
+      <genOperations ecoreOperation="engine.ecore#//SynchronousQxEventHandler/getLastSndEvent"/>
+      <genOperations ecoreOperation="engine.ecore#//SynchronousQxEventHandler/setLastEvent">
+        <genParameters ecoreParameter="engine.ecore#//SynchronousQxEventHandler/setLastEvent/evt"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//SynchronousQxEventHandler/setLastRcvEvent">
+        <genParameters ecoreParameter="engine.ecore#//SynchronousQxEventHandler/setLastRcvEvent/evt"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//SynchronousQxEventHandler/setLastSndEvent">
+        <genParameters ecoreParameter="engine.ecore#//SynchronousQxEventHandler/setLastSndEvent/evt"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="engine.ecore#//IChannel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//IChannel/cmdInterpretrers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//IChannel/frameInterpreters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference engine.ecore#//IChannel/eventListeners"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute engine.ecore#//IChannel/lastFrame"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/send">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/send/bytes"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/receive">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/receive/bytes"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/inputReady"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/outputReady"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/connected"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/close"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/debug"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/get">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/get/event"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/send.1">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/send.1/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/receive.1"/>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/addFrameListener">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/addFrameListener/frameListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/removeFrameListener">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/removeFrameListener/frameListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/addCmdListener">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/addCmdListener/cmdListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/removeCmdListener">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/removeCmdListener/cmdListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/addQxEventListener">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/addQxEventListener/eventListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="engine.ecore#//IChannel/removeQxEventListener">
+        <genParameters ecoreParameter="engine.ecore#//IChannel/removeQxEventListener/eventListener"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Cmd" basePackage="net.sf.xqz.model" disposableProviderFactory="true"
+      ecorePackage="cmd.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="cmd.ecore#//PRIORITY">
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/LOWEST"/>
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/LOW"/>
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/MEDIUM"/>
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/HIGH"/>
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/HIGHEST"/>
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="cmd.ecore#//PRIORITY/VITAL"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="cmd.ecore#//Cmd">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmd.ecore#//Cmd/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cmd.ecore#//Cmd/stamp"/>
+    </genClasses>
+    <genClasses ecoreClass="cmd.ecore#//CompoundCmd">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cmd.ecore#//CompoundCmd/children"/>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/add">
+        <genParameters ecoreParameter="cmd.ecore#//CompoundCmd/add/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/add.1">
+        <genParameters ecoreParameter="cmd.ecore#//CompoundCmd/add.1/index"/>
+        <genParameters ecoreParameter="cmd.ecore#//CompoundCmd/add.1/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/queue">
+        <genParameters ecoreParameter="cmd.ecore#//CompoundCmd/queue/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/pop"/>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/remove">
+        <genParameters ecoreParameter="cmd.ecore#//CompoundCmd/remove/index"/>
+      </genOperations>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/remove.1">
+        <genParameters ecoreParameter="cmd.ecore#//CompoundCmd/remove.1/cmd"/>
+      </genOperations>
+      <genOperations ecoreOperation="cmd.ecore#//CompoundCmd/drop"/>
+    </genClasses>
+    <genClasses ecoreClass="cmd.ecore#//XCmd"/>
+  </genPackages>
+</genmodel:GenModel>

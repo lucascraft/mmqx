@@ -1,0 +1,44 @@
+! *** fwk ***
+
+feature@net.sf.xqz.fwk=COPY,LOCAL_SRC_REPO,net.sf.xqz.fwk-feature
+plugin@net.sf.xqz.engine=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine
+plugin@net.sf.xqz.engine.edit=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.edit
+plugin@net.sf.xqz.engine.script.orchestror=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.script.orchestror
+
+! *** ui ***
+
+feature@net.sf.xqz.engine.ui=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.ui-feature
+plugin@net.sf.xqz.engine.ui=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.ui
+plugin@net.sf.xqz.engine.ui.charts=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.ui.charts
+plugin@net.sf.xqz.engine.script.orchestror.ui=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.script.orchestror.ui
+
+! *** rcp ***
+
+feature@net.sf.xqz.rcp=COPY,LOCAL_SRC_REPO,net.sf.xqz.rcp-feature
+plugin@net.sf.xqz.rcp=COPY,LOCAL_SRC_REPO,net.sf.xqz.rcp
+
+! *** tests ***
+
+feature@net.sf.xqz.tests=COPY,LOCAL_SRC_REPO,net.sf.xqz.tests-feature
+plugin@net.sf.xqz.tests.engine=COPY,LOCAL_SRC_REPO,net.sf.xqz.tests.engine
+
+! *** examples ***
+
+feature@net.sf.xqz.engine.examples=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.examples-feature
+plugin@net.sf.xqz.engine.examples=COPY,LOCAL_SRC_REPO,net.sf.xqz.engine.examples
+
+! *** smart ambient ***
+
+feature@net.sf.smbt.core=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.core-feature
+plugin@net.sf.smbt.colors=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.colors
+plugin@net.sf.smbt.comm=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.comm
+
+feature@net.sf.smbt.i2c=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.i2c-feature
+plugin@net.sf.smbt.i2c=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.i2c
+plugin@net.sf.smbt.i2c.devices=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.i2c.devices
+
+feature@net.sf.smbt.i2c.thingm=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.i2c.thingm-feature
+plugin@net.sf.smbt.i2c.thingm=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.i2c.thingm
+plugin@net.sf.smbt.i2c.thingm.ui=COPY,LOCAL_SRC_REPO/smbt/fwk,net.sf.smbt.i2c.thingm.ui
+
+

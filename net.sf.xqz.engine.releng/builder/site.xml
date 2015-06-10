@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/net.sf.xqz.engine.ui_1.0.0.jar" id="net.sf.xqz.engine.ui" version="1.0.0"/>
+   <feature url="features/net.sf.xqz.fwk_1.0.0.jar" id="net.sf.xqz.fwk" version="1.0.0"/>
+   <feature url="features/net.sf.xqz.rcp_1.0.0.jar" id="net.sf.xqz.rcp" version="1.0.0"/>
+   <feature url="features/net.sf.xqz.tests_1.0.0.jar" id="net.sf.xqz.tests" version="1.0.0"/>
+</site>

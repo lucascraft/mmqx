@@ -1,0 +1,268 @@
+<project name="Build specific targets and properties" default="noDefault">
+	<import file="utilsTargets.xml"/>
+	
+	<!-- ===================================================================== -->
+	<!-- Run a given ${target} on all elements being built -->
+	<!-- Add on <ant> task for each top level element being built. -->
+	<!-- ===================================================================== -->
+	<available property="allElementsFile" file="${builder}/allElements.xml" value="${builder}/allElements.xml"/>
+	<property name="allElementsFile" location="${eclipse.pdebuild.templates}/headless-build/allElements.xml"/>
+
+	<import file="${allElementsFile}" />
+	<target name="allElements">
+		<antcall target="allElementsDelegator" />
+	</target>
+	
+	<!-- ===================================================================== -->
+	<!-- ===================================================================== -->
+	<target name="getBaseComponents" depends="checkLocalBase" unless="skipBase">
+		<get src="${eclipseBaseURL}" dest="${buildDirectory}/../temp-base.zip" />
+		<unzip dest="${base}" overwrite="true" src="${buildDirectory}/../temp-base.zip" />
+	</target>
+
+	<target name="checkLocalBase">
+		<available file="${base}" property="skipBase" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Check out map files from correct repository -->
+	<!-- Replace values for mapsCheckoutTag as desired. -->
+	<!-- ===================================================================== -->
+	<target name="getMapFiles" depends="checkLocalMaps" unless="skipMaps">
+		<property name="mapsCheckoutTag" value="HEAD" />
+		<cvs cvsRoot="${mapsRepo}" package="${mapsRoot}" dest="${buildDirectory}/maps" tag="${mapsCheckoutTag}" />
+	</target>
+
+	<target name="checkLocalMaps">
+		<available property="skipMaps" file="${buildDirectory}/maps" />
+	</target>
+
+	<target name="tagMapFiles" if="tagMaps">
+		<cvs dest="${buildDirectory}/maps/${mapsRoot}" command="tag ${mapsTagTag}" />
+	</target>
+
+	<!-- ===================================================================== -->
+
+	<target name="clean" unless="noclean">
+		<antcall target="allElements">
+			<param name="target" value="cleanElement" />
+		</antcall>
+	</target>
+
+	<target name="gatherLogs">
+		<mkdir dir="${buildDirectory}/${buildLabel}/compilelogs" />
+		<antcall target="allElements">
+			<param name="target" value="gatherLogs" />
+		</antcall>
+		<unzip dest="${buildDirectory}/${buildLabel}/compilelogs" overwrite="true">
+			<fileset dir="${buildDirectory}/features">
+				<include name="**/*.log.zip" />
+			</fileset>
+		</unzip>
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before setup -->
+	<!-- ===================================================================== -->
+	<target name="preSetup">
+		<antcall target="prepareDirStructure"/>
+		
+		<echo message="Copy .product"></echo>
+		
+		<!-- copy .product to scripts dir -->
+		<copy 
+			toDir="${productDir}" 
+			file="${productFile}"/>
+
+		<!-- copy map file to temp build dir map directory -->
+		<antcall target="copyMapFile"/>
+		
+		<!-- patch local code repo : replace token LOCAL_SRC_REPO by pertinent codebase path -->
+		<antcall target="patchMapFiles"/>
+		
+		<antcall target="prepareUpdateSite"/>
+		<antcall target="prepareP2Repo"/>
+		
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after setup but before starting the build proper -->
+	<!-- ===================================================================== -->
+	<target name="postSetup">
+		<antcall target="getBaseComponents" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before fetching the build elements -->
+	<!-- ===================================================================== -->
+	<target name="preFetch">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after fetching the build elements -->
+	<!-- ===================================================================== -->
+	<target name="postFetch">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before generating the build scripts. -->
+	<!-- ===================================================================== -->
+	<target name="preGenerate">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after generating the build scripts. -->
+	<!-- ===================================================================== -->
+	<target name="postGenerate">
+		<antcall target="clean" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running the build.xmls for the elements being built. -->
+	<!-- ===================================================================== -->
+	<target name="preProcess">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after running the build.xmls for the elements being built. -->
+	<!-- ===================================================================== -->
+	<target name="postProcess">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running assemble. -->
+	<!-- ===================================================================== -->
+	<target name="preAssemble">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after  running assemble. -->
+	<!-- ===================================================================== -->
+	<target name="postAssemble">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do before running package. -->
+	<!-- ===================================================================== -->
+	<target name="prePackage">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after  running package. -->
+	<!-- ===================================================================== -->
+	<target name="postPackage">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do after the build is done. -->
+	<!-- ===================================================================== -->
+	<target name="postBuild">
+		<antcall target="gatherLogs" />
+		
+		<antcall target="test"></antcall>
+		  
+		<property name="UpdateSiteStagingLocation" value="${updateSiteDir}"/>
+		<property name="sitePackagePrefix" value="UpdateSite"/>
+		<antcall target="generateUpdateSite"/>
+		
+		<!--
+		<property file="${buildDirectory}/product.version"/>
+		<mkdir dir="${buildDirectory}/result/tmp" />
+		<antcall target="run.director">
+			<param name="p2.director.install.path" value="${buildDirectory}/result/tmp/eclipse"/>
+			<param name="p2.os" value="macosx"/>
+			<param name="p2.ws" value="carbon"/>
+			<param name="p2.arch" value="ppc"/>
+			<param name="p2.IU" value="net.sf.xqz.rcp.product" />
+			<param name="p2.version" value="${acmeVersion}"/>
+			<param name="p2.director.extraArgs" value=""/>
+		</antcall>
+		-->
+		<!--<zip destfile="${buildDirectory}/result/xqz-p2-RCP-osx-${acmeVersion}.zip" basedir="${buildDirectory}/result/tmp" />
+		<delete dir="${buildDirectory}/result/tmp" />-->
+	</target>
+	
+	<target name="run.director">
+		<exec executable="${baseLocation}/eclipse" failonerror="false" timeout="900000">
+			<arg line="-application org.eclipse.equinox.p2.director.app.application" />
+			<arg line="-nosplash" />
+			<!--<arg line="- -launcher.suppressErrors" />-->
+			<arg line="-consoleLog" />
+			<arg line="-flavor" />
+			<arg line="-installIU ${p2.IU}" />
+			<arg line="-version ${p2.version}" />
+			<arg line="-p2.os ${p2.os}" />
+			<arg line="-p2.ws ${p2.ws}" />
+			<arg line="-profileProperties org.eclipse.update.install.features=true" />
+			<arg line="-p2.arch ${p2.arch}" />
+			<arg line="-roaming" />
+			<arg line="-profile XQZ" />
+			<arg line="${p2.director.extraArgs}" />
+			<arg line="-metadataRepository ${p2.metadata.repo}" />
+			<arg line="-artifactRepository ${p2.artifact.repo}" />
+			<arg line="-destination ${p2.director.install.path}" />
+			<arg line="-bundlepool ${p2.director.install.path}" />
+			<arg line="-vmargs" />
+			<arg line="-Declipse.p2.data.area=${p2.director.install.path}/p2" />
+		</exec>
+		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.director.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do to test the build results -->
+	<!-- ===================================================================== -->
+	<target name="test">
+		  <echo message="Setting up tests in ${eclipseAutomatedTestHome}"/>
+		    
+		  <copy file="${buildDirectory}/${buildLabel}/${archiveNamePrefix}-${baseos}.${basews}.${basearch}.zip" tofile="${eclipseAutomatedTestHome}/XQZ-SDK-${buildId}.zip" />
+		  <!--<copy file="${buildDirectory}/${buildLabel}/net.sf.xqz.engine.tests-${buildId}.zip" tofile="${eclipseAutomatedTestHome}/net.sf.xqz.engine.tests-${buildId}.zip" />-->
+
+		<unzip dest="${eclipseAutomatedTestHome}" src="${eclipseAutomatedTestHome}/XQZ-SDK-${buildId}.zip" overwrite="true"></unzip>
+		
+		<copydir 
+			dest="${eclipseAutomatedTestHome}/eclipse/plugins" 
+			src="${eclipseAutomatedTestHome}/${archivePrefix}/plugins" forceoverwrite="true"/>
+			
+		<copydir 
+			dest="${eclipseAutomatedTestHome}/eclipse/features" 
+			src="${eclipseAutomatedTestHome}/${archivePrefix}/features" forceoverwrite="true"/>
+			
+		<exec executable="${javaExe}" dir="${eclipseAutomatedTestHome}" failonerror="false">
+			<arg line="-jar ${eclipseLauncherPath}"/>
+			<arg line="-application org.eclipse.ant.core.antRunner"/>
+			<arg line="-buildfile eclipse/plugins/net.sf.xqz.tests.engine_1.0.0/test.xml"/>
+			<arg line="-Declipse-home=${eclipseAutomatedTestHome}/eclipse" />
+			<arg line="-Dos=${baseos}" /> 
+			<arg line="-Dws=${basews}" /> 
+			<arg line="-Darch=${basearch}" />		
+			<arg line="-DuseEclipseExe" />		
+		</exec>
+
+		<!--
+		<ant antfile="${eclipseAutomatedTestHome}/test.xml" target="eclipse-test" dir="${eclipseAutomatedTestHome}"> 
+			
+			<property name="os" value="${baseos}" />
+		    <property name="ws" value="${basews}" />
+		    <property name="arch" value="${basearch}" />
+		    <property name="testPlugin" value="net.sf.xqz.tests.engine_1.0.0" /> 
+		    <property name="report" value="net.sf.xqz.tests.engine" /> 
+			
+			<property name="useEclipseExe" value="true"/>
+	   </ant> 
+	   -->
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Steps to do to publish the build results -->
+	<!-- ===================================================================== -->
+	<target name="publish">
+	</target>
+
+	<!-- ===================================================================== -->
+	<!-- Default target                                                        -->
+	<!-- ===================================================================== -->
+	<target name="noDefault">
+		<echo message="You must specify a target when invoking this file" />
+	</target>
+
+</project>

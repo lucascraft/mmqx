@@ -6,7 +6,7 @@
 /***********************************************************************************
  * Cross Queues - A Model driven I/O queues utilities framework 
  * 
- * Copyright (c) 2008 - 2010, Lucas Bigeardel
+ * Copyright (c) 2008 - 2015, Lucas Bigeardel
  * 
  * The library is released under:
  * 
@@ -44,8 +44,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.sf.net/xqz/engine/script/Orchestror" 
-       class = "net.sf.xqz.engine.script.orchestror.OrchestrorPackage"
-       genModel = "net/sf/xqz/engine/script/Orchestror.genmodel" /> 
+       class = "net.sf.xqz.engine.script.orchestror.OrchestrorPackage" /> 
 	
   </extension>
 

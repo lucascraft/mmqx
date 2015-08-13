@@ -928,7 +928,7 @@ public class EngineUtil {
 								);
 								qx.eSetDeliver(false);
 								qx.getCommands().removeAll(lst);
-								qx.eSetDeliver(false);
+								qx.eSetDeliver(true);
 							}
 								
 							if (size > 1) {
